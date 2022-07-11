@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Birthday List</h1>
+
+<div class="card">
+    <div class="card-content">
+        <span class="card-title"> {{ birthday.name }}</span>
+        <p>Date: {{ birthday.date }}</p>
+        <p>Venue: {{ birthday.venue }}</p>
+    </div>
+</div>
+
+{% endblock %}
