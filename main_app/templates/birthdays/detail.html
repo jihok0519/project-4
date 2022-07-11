@@ -1,16 +1,18 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>Birthday List</h1>
+<h1>Birthday Details</h1>
 
 <div class="card">
-    <a href="{% url 'detail' birthday.id %}">
-        <div class="card-content">
+    <div class="card-content">
         <span class="card-title"> {{ birthday.name }}</span>
         <p>Date: {{ birthday.date }}</p>
         <p>Relationship: {{ birthday.relationship }}</p>
         <p>Venue: {{ birthday.venue }}</p>
-        </div>
-    </a>
+    </div>
+    <div class="card-action">
+        <a href="{% url 'birthdays_update' birthday.id %}">Edit</a>
+        <a href="{% url 'birthdays_delete' birthday.id %}">Delete</a>
+    </div>
 </div>
 
 {% endblock %}

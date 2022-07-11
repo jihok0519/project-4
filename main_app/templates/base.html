@@ -27,8 +27,9 @@
 						</li>
 					</ul>
 					<ul class="right">
-						<li><a href="/about">About</a></li>
-						<li><a href="/birthdays">View All Birthdays</a></li>
+						<li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'birthdays_create' %}">Add a Birthday</a></li>
+						<li><a href="{% url 'index' %}">View All Birthdays</a></li>
 					</ul>
 				</div>
 			</nav>
