@@ -78,4 +78,18 @@ class BirthdayDelete(DeleteView):
     model = Birthday
     success_url = '/birthdays/'
 
-class GiftDetail(LoginRequiredMixin, DetailView)
+class GiftDetail(LoginRequiredMixin, DetailView):
+    model = Gift
+    template_name = 'gifts/detail.html'
+
+class GiftCreate(LoginRequiredMixin, CreateView):
+    model = Gift
+    fields = ['giftName, price']
+
+class GiftUpdate(LoginRequiredMixin, UpdateView):
+    model = Gift
+    fields = ['giftName, price']
+
+class GiftDelete(LoginRequiredMixin, DeleteView):
+    model = Gift
+    success_url = '/gifts/'
