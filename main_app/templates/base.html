@@ -5,7 +5,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>RememBerthday</title>
+		<title>RememBirthday</title>
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
@@ -23,13 +23,16 @@
 				<div class="nav-wrapper">
 					<ul>
 						<li>
-							<a href="/" class="left brand-logo">&nbsp;&nbsp;RememBerthday</a>
+							<a href="/" class="left brand-logo">&nbsp;&nbsp;RememBirthday</a>
 						</li>
 					</ul>
 					<ul class="right">
 						<li><a href="{% url 'about' %}">About</a></li>
                         <li><a href="{% url 'birthdays_create' %}">Add a Birthday</a></li>
 						<li><a href="{% url 'index' %}">View All Birthdays</a></li>
+						<li><a href="{% url 'gift_create' %}">Add a Gift</a></li>
+						<li><a href="{% url 'login' %}">Login</a></li>
+						<li><a href="{% url 'signup' %}">Sign Up</a></li>
 					</ul>
 				</div>
 			</nav>

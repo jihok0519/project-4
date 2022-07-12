@@ -2,15 +2,16 @@
 
 <h1>Birthday List</h1>
 
+{% for birthday in birthdays %}
 <div class="card">
     <a href="{% url 'detail' birthday.id %}">
         <div class="card-content">
-        <span class="card-title"> {{ birthday.name }}</span>
-        <p>Date: {{ birthday.date }}</p>
-        <p>Relationship: {{ birthday.relationship }}</p>
-        <p>Venue: {{ birthday.venue }}</p>
+            <span class="card-title"> {{ birthday.name }}</span>
+            <p>Date: {{ birthday.date }}</p>
+            <p>Relationship: {{ birthday.relationship }}</p>
+            <p>Venue: {{ birthday.venue }}</p>
         </div>
     </a>
 </div>
 
-{% endblock %}
+{% endfor %} {% endblock %}

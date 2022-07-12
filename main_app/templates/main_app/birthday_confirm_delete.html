@@ -5,7 +5,7 @@
     <span class="teal-text"> {{ object.name }}</span>?
 </h4>
 
-<form action="" meothd="POST">
+<form action="" method="POST">
     {% csrf_token %}
     <input type="submit" value="Yes - Delete!" class="btn" />
     <a href="{% url 'detail' birthday.id %}">Cancel</a>
