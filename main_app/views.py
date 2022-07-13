@@ -8,19 +8,20 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .models import Birthday, Gift
 
-import uuid
-import boto3
 
 def home(request):
     return render(request, 'home.html')
 
+
 def about(request):
     return render(request, 'about.html')
+
 
 @login_required
 def birthdays_index(request):
     birthdays = Birthday.objects.filter(user=request.user)
     return render(request, 'birthdays/index.html', {'birthdays': birthdays})
+
 
 @login_required
 def birthdays_detail(request, birthday_id):
@@ -32,15 +33,18 @@ def birthdays_detail(request, birthday_id):
         'gift': gift_birthday,
     })
 
+
 @login_required
 def assoc_gift(request, birthday_id, gift_id):
     Birthday.objects.get(id=birthday_id).gift.add(gift_id)
     return redirect('detail', birthday_id=birthday_id)
 
+
 @login_required
 def assoc_gift_delete(request, birthday_id, gift_id):
     Birthday.objects.get(id=birthday_id).gift.remove(gift_id)
     return redirect('detail', birthday_id=birthday_id)
+
 
 def signup(request):
     error_messages = ''
@@ -51,7 +55,7 @@ def signup(request):
             login(request, user)
             return redirect('index')
         else:
-            error_messages = 'Invalid Info - Please Try Again.'
+            error_messages = 'Invalid Info - Please Try Again'
     form = UserCreationForm()
     context = {
         'form': form,
@@ -59,38 +63,46 @@ def signup(request):
     }
     return render(request, 'registration/signup.html', context)
 
+
 class BirthdayCreate(CreateView):
     model = Birthday
-    fields = '__all__'
+    fields = ['name', 'date', 'relationship', 'venue']
     success_url = '/birthdays/'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+
 class BirthdayUpdate(UpdateView):
     model = Birthday
     fields = ['date', 'relationship', 'venue']
+
 
 class BirthdayDelete(DeleteView):
     model = Birthday
     success_url = '/birthdays/'
 
+
 class GiftList(LoginRequiredMixin, ListView):
     model = Gift
     template_name = 'gifts/index.html'
+
 
 class GiftDetail(LoginRequiredMixin, DetailView):
     model = Gift
     template_name = 'gifts/detail.html'
 
+
 class GiftCreate(LoginRequiredMixin, CreateView):
     model = Gift
-    fields = ['giftName, price']
+    fields = ['giftName', 'price']
+
 
 class GiftUpdate(LoginRequiredMixin, UpdateView):
     model = Gift
-    fields = ['giftName, price']
+    fields = ['giftName', 'price']
+
 
 class GiftDelete(LoginRequiredMixin, DeleteView):
     model = Gift
