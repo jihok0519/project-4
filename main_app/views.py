@@ -64,7 +64,7 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
-class BirthdayCreate(CreateView):
+class BirthdayCreate(LoginRequiredMixin, CreateView):
     model = Birthday
     fields = ['name', 'date', 'relationship', 'venue']
     success_url = '/birthdays/'
@@ -74,12 +74,12 @@ class BirthdayCreate(CreateView):
         return super().form_valid(form)
 
 
-class BirthdayUpdate(UpdateView):
+class BirthdayUpdate(LoginRequiredMixin, UpdateView):
     model = Birthday
     fields = ['date', 'relationship', 'venue']
 
 
-class BirthdayDelete(DeleteView):
+class BirthdayDelete(LoginRequiredMixin, DeleteView):
     model = Birthday
     success_url = '/birthdays/'
 

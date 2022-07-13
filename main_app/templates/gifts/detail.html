@@ -6,9 +6,8 @@
 	<a href="{% url 'gifts_detail' gift.id %}">
 		<div class="card-content">
 			<span class="card-title">
-				<span class="{{ gift.giftName.lower }}-text">{{ gift.giftName }}</span>
-                <br />
-				<span class="{{ gift.price.lower }}-text">{{ gift.price }}$</span>
+				<span class="{{ gift.giftName.lower }}-text">A {{ gift.giftName }} will be</span>
+				<span class="{{ gift.price.lower }}-text">{{ gift.price }}$.</span>
 			</span>
 		</div>
 		<div class="card-action">
