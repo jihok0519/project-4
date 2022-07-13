@@ -3,46 +3,69 @@
 <h1>Birthday Details</h1>
 
 <div class="row">
+	<div class="col s6">
+		<div class="card">
+			<div class="card-content">
+				<span class="card-title"> {{ birthday.name }}</span>
+				<p>Date: {{ birthday.date }}</p>
+				<p>Relationship: {{ birthday.relationship }}</p>
+				<p>Venue: {{ birthday.venue }}</p>
+			</div>
+			<div class="card-action">
+				<a href="{% url 'birthdays_update' birthday.id %}">Edit</a>
+				<a href="{% url 'birthdays_delete' birthday.id %}">Delete</a>
+			</div>
+		</div>
+	</div>
+	<div class="col s6">
+		<table class="striped">
+			<thead>
+				<tr>
+					<h3>{{ birthday.name }}'s Gifts</h3>
+					{% if birthday.gifts.count %} {% for gift in birthday.gifts.all %}
+					<div class="card">
+						<div class="card-content">
+							<span class="card-title"> {{ gift.giftName }} </span>
+						</div>
+						<div class="card-action">
+							<form
+								action="{% url 'assoc_gift_delete' birthday.id gift.id %}"
+								method="post">
+								{% csrf_token %}
+								<button type="submit" class="btn">Delete</button>
+							</form>
+						</div>
+					</div>
+					{% endfor %} {% else %}
+					<h5>{{ birthday.name }} has no gifts yet.</h5>
+					{% endif %}
+				</tr>
+			</thead>
+		</table>
+	</div>
     <div class="col s6">
+        <h3>Gifts to add</h3>
+        {% if gifts.count %} {% for gift in gifts.all %}
         <div class="card">
             <div class="card-content">
-                <span class="card-title"> {{ birthday.name }}</span>
-                <p>Date: {{ birthday.date }}</p>
-                <p>Relationship: {{ birthday.relationship }}</p>
-                <p>Venue: {{ birthday.venue }}</p>
+                <span class="card-title">
+                    <span>
+                    {{ gift.giftName }}
+                    </span>
+                </span>
             </div>
             <div class="card-action">
-                <a href="{% url 'birthdays_update' birthday.id %}">Edit</a>
-                <a href="{% url 'birthdays_delete' birthday.id %}">Delete</a>
+                <form action="{% url 'assoc_gift' birthday.id gift.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Add</button>
+                </form>
             </div>
         </div>
+        {% endfor %}
+        {% else %}
+        <h5>There have been no gifts added yet.</h5>
     </div>
-    <div class="col s6">
-        <table class="striped">
-            <thead>
-                <tr>
-                    <h3> {{ birthday.name }}'s Gifts </h3>
-                    {% if gift.count %} {% for gifts in gift.all %}
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title">
-                                {{ gifts.giftName }}
-                            </span>
-                        </div>
-                        <div class="card-action">
-                            <form action="" method="POST">
-                                {% csrf_token %}
-                                <button type="submit" class="btn">Add</button>
-                            </form>
-                        </div>
-                    </div>
-                    {% endfor %} {% else %}
-                    <h5>No Gifts Yet</h5>
-                    {% endif %}
-                </tr>
-            </thead>
-        </table>
-    </div>
+    {% endif %}
 </div>
 
 {% endblock %}

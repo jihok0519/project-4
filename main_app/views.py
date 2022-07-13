@@ -36,13 +36,13 @@ def birthdays_detail(request, birthday_id):
 
 @login_required
 def assoc_gift(request, birthday_id, gift_id):
-    Birthday.objects.get(id=birthday_id).gift.add(gift_id)
+    Birthday.objects.get(id=birthday_id).gifts.add(gift_id)
     return redirect('detail', birthday_id=birthday_id)
 
 
 @login_required
 def assoc_gift_delete(request, birthday_id, gift_id):
-    Birthday.objects.get(id=birthday_id).gift.remove(gift_id)
+    Birthday.objects.get(id=birthday_id).gifts.remove(gift_id)
     return redirect('detail', birthday_id=birthday_id)
 
 
