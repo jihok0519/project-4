@@ -3,4 +3,18 @@
 <h1>Gift Details</h1>
 
 <div class="card">
+	<a href="{% url 'gifts_detail' gift.id %}">
+		<div class="card-content">
+			<span class="card-title">
+				<span class="{{ gift.giftName.lower }}-text">{{ gift.giftName }}</span>
+				<span class="{{ gift.price.lower }}-text">{{ gift.price }}</span>
+			</span>
+		</div>
+		<div class="card-action">
+			<a href="{% url 'gifts_update' gift.id %}">Edit</a>
+			<a href="{% url 'gifts_delete' gift.id %}">Delete</a>
+		</div>
+	</a>
 </div>
+
+{% endblock %}

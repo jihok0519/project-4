@@ -11,6 +11,7 @@ urlpatterns = [
     path('birthdays/<int:pk>/delete/', views.BirthdayDelete.as_view(), name="birthdays_delete"),
     path('gifts/<int:gift_id>/assoc_gift/<int:gift_id>/', views.assoc_gift, name='assoc_gift'),
     path('gifts/<int:gift_id>/assoc_gift/<int:gift_id>/delete/', views.assoc_gift_delete, name='assoc_gift_delete'),
+    path('gifts/', views.GiftList.as_view(), name='gifts_index'),
     path('gifts/<int:pk>/', views.GiftDetail.as_view(), name='gifts_detail'),
     path('gifts/create/', views.GiftCreate.as_view(), name='gifts_create'),
     path('gifts/<int:pk>/update/', views.GiftUpdate.as_view(), name='gifts_update'),

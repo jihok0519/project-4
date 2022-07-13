@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -13,33 +14,28 @@ import boto3
 def home(request):
     return render(request, 'home.html')
 
-
 def about(request):
     return render(request, 'about.html')
-
 
 @login_required
 def birthdays_index(request):
     birthdays = Birthday.objects.filter(user=request.user)
     return render(request, 'birthdays/index.html', {'birthdays': birthdays})
 
-
 @login_required
 def birthdays_detail(request, birthday_id):
     birthday = Birthday.objects.get(id=birthday_id)
     gift_birthday = Gift.objects.exclude(
-        id_in=birthday.gift.all().values_list('id'))
+        id__in=birthday.gift.all().values_list('id'))
     return render(request, 'birthdays/detail.html', {
         'birthday': birthday,
         'gift': gift_birthday,
     })
 
-
 @login_required
 def assoc_gift(request, birthday_id, gift_id):
     Birthday.objects.get(id=birthday_id).gift.add(gift_id)
     return redirect('detail', birthday_id=birthday_id)
-
 
 @login_required
 def assoc_gift_delete(request, birthday_id, gift_id):
@@ -68,15 +64,21 @@ class BirthdayCreate(CreateView):
     fields = '__all__'
     success_url = '/birthdays/'
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class BirthdayUpdate(UpdateView):
     model = Birthday
     fields = ['date', 'relationship', 'venue']
 
-
 class BirthdayDelete(DeleteView):
     model = Birthday
     success_url = '/birthdays/'
+
+class GiftList(LoginRequiredMixin, ListView):
+    model = Gift
+    template_name = 'gifts/index.html'
 
 class GiftDetail(LoginRequiredMixin, DetailView):
     model = Gift
