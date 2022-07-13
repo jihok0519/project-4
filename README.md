@@ -1,4 +1,4 @@
-# project-4
+# RememBirthday
 
 
 #### A web app that tracks upcoming birthdays
@@ -17,7 +17,7 @@
 * HTML
 
 
-** Trello Planning
+## Trello Planning
 * Link to Trello: https://trello.com/b/IlcPnlAX/remembirthday
 
 
