@@ -14,6 +14,7 @@
 * Django
 * Python
 * PostgreSQL
+* HTML
 
 
 ** Trello Planning
