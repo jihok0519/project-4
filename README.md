@@ -23,7 +23,8 @@
 
 ## Project Next Steps
 * User will be alerted if a birthday is approaching soon
+* User will be redirected back to the View All Birthdays page after editing their birthday
 
 
 ## Deployed Link
-* Link to Heroku: 
+* Link to Heroku: https://remembirthday.herokuapp.com/
