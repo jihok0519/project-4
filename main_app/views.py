@@ -77,6 +77,7 @@ class BirthdayCreate(LoginRequiredMixin, CreateView):
 class BirthdayUpdate(LoginRequiredMixin, UpdateView):
     model = Birthday
     fields = ['date', 'relationship', 'venue']
+    success_url = '/birthdays/'
 
 
 class BirthdayDelete(LoginRequiredMixin, DeleteView):
