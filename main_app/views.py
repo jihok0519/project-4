@@ -26,23 +26,23 @@ def birthdays_index(request):
 @login_required
 def birthdays_detail(request, birthday_id):
     birthday = Birthday.objects.get(id=birthday_id)
-    gift_birthday = Gift.objects.exclude(
+    gift = Gift.objects.exclude(
         id__in=birthday.gift.all().values_list('id'))
     return render(request, 'birthdays/detail.html', {
         'birthday': birthday,
-        'gift': gift_birthday,
+        'gift': gift,
     })
 
 
 @login_required
 def assoc_gift(request, birthday_id, gift_id):
-    Birthday.objects.get(id=birthday_id).gifts.add(gift_id)
+    Birthday.objects.get(id=birthday_id).gift.add(gift_id)
     return redirect('detail', birthday_id=birthday_id)
 
 
 @login_required
 def assoc_gift_delete(request, birthday_id, gift_id):
-    Birthday.objects.get(id=birthday_id).gifts.remove(gift_id)
+    Birthday.objects.get(id=birthday_id).gift.remove(gift_id)
     return redirect('detail', birthday_id=birthday_id)
 
 
@@ -96,12 +96,12 @@ class GiftDetail(LoginRequiredMixin, DetailView):
 
 class GiftCreate(LoginRequiredMixin, CreateView):
     model = Gift
-    fields = ['giftName', 'price']
+    fields = ['name', 'price']
 
 
 class GiftUpdate(LoginRequiredMixin, UpdateView):
     model = Gift
-    fields = ['giftName', 'price']
+    fields = ['name', 'price']
 
 
 class GiftDelete(LoginRequiredMixin, DeleteView):

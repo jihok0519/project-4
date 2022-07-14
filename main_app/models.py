@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 
 
 class Gift(models.Model):
-    giftName = models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
     price = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.giftName
+        return self.name
 
     def get_absolute_url(self):
         return reverse('gifts_detail', kwargs={'pk': self.id})

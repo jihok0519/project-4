@@ -22,10 +22,10 @@
 			<thead>
 				<tr>
 					<h3>{{ birthday.name }}'s Gifts</h3>
-					{% if birthday.gifts.count %} {% for gift in birthday.gifts.all %}
+					{% if birthday.gift.count %} {% for gift in birthday.gift.all %}
 					<div class="card">
 						<div class="card-content">
-							<span class="card-title"> {{ gift.giftName }} </span>
+							<span class="card-title"> {{ gift }} </span>
 						</div>
 						<div class="card-action">
 							<form
@@ -45,12 +45,12 @@
 	</div>
     <div class="col s6">
         <h3>Gifts to add</h3>
-        {% if gifts.count %} {% for gift in gifts.all %}
+        {% if gift.count %} {% for gift in gift.all %}
         <div class="card">
             <div class="card-content">
                 <span class="card-title">
                     <span>
-                    {{ gift.giftName }}
+                    {{ gift }}
                     </span>
                 </span>
             </div>
